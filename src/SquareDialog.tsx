@@ -22,7 +22,7 @@ const SquareDialog = forwardRef((props: SquareDialogProps, fwd_ref: React.Forwar
         <MuseText>{props.grid_text}</MuseText>
 
         <div style={{display: "flex", justifyContent: "space-around", gap: "1vw"}}>
-            <button onClick={close}>
+            <button autoFocus onClick={close}>
                 Close
             </button>
         </div>
