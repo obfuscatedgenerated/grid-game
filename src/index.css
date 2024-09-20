@@ -113,7 +113,7 @@ button.danger:active {
 
 /* too lazy 4 css modules */
 .grid-square.crossed {
-    background-image: url("./cross.png");
+    background-image: url("/grid-game/cross.png");
 }
 
 .grid-square.highlight {
