@@ -1,5 +1,6 @@
 import {useAudioPlayer} from "react-use-audio-player";
 import {useEffect, useRef} from "react";
+import BenDialog from "./BenDialog.tsx";
 
 const highlight_random = (clear_after: boolean) => {
     console.log("highlighting random!");
@@ -37,8 +38,16 @@ const clear_all_highlights = () => {
     });
 }
 
+const clear_all_crosses = () => {
+    const squares = document.querySelectorAll(".grid-square.crossed");
+    squares.forEach((square) => {
+        square.classList.remove("crossed");
+    });
+}
+
 function Control() {
     const do_randomise_ref = useRef(false);
+    const clear_dialog_ref = useRef<HTMLDialogElement>(null);
 
     const {load, play} = useAudioPlayer(); // this is a local player loaded with itembox.mp3
 
@@ -91,11 +100,21 @@ function Control() {
         clear_all_highlights();
     }
 
+    const onClearCrossesClick = () => {
+        if (clear_dialog_ref.current) {
+            clear_dialog_ref.current.showModal();
+        } else {
+            console.error("clear dialog ref is null!");
+        }
+    }
+
     return (
         <div className="control">
             <button onClick={onRandomClick}>Choose random</button>
             <button onClick={onClearHighlightsClick}>Clear highlights</button>
-            <button className="danger">Clear crosses</button>
+            <button className="danger" onClick={onClearCrossesClick}>Clear crosses</button>
+
+            <BenDialog ref={clear_dialog_ref} text="Are you sure you want to clear all crosses?" onAccept={clear_all_crosses} onReject={() => {}} />
         </div>
     );
 }
