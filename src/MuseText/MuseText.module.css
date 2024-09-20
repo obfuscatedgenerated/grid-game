@@ -1,0 +1,12 @@
+.muse {
+    color: #fff;
+    font-size: 50px;
+    border-bottom: 4px solid #fff;
+    line-height: 85px;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-top: 4px solid #fff;
+    box-sizing: border-box;
+    font-family: "IBM Plex Sans", sans-serif;
+    width: fit-content;
+}
