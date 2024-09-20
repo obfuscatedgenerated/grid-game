@@ -17,10 +17,10 @@ const highlight_random = (clear_after: boolean) => {
             square.classList.add("highlight");
 
             if (clear_after) {
-                // remove highlight after 100ms
+                // remove highlight after 100ms (1ms off to prevent race condition)
                 setTimeout(() => {
                     square.classList.remove("highlight");
-                }, 100);
+                }, 99);
             }
 
             break;
@@ -52,7 +52,7 @@ function Control() {
     const {load, play} = useAudioPlayer(); // this is a local player loaded with itembox.mp3
 
     useEffect(() => {
-        load("public/itembox.mp3", {autoplay: false});
+        load("itembox.mp3", {autoplay: false});
     }, [load]);
 
     console.log("render control!");
@@ -62,9 +62,9 @@ function Control() {
             return;
         }
 
-        // sanity check, are there non highlighted, non crossed squares left?
+        // sanity check, are there at least 2 non highlighted, non crossed squares left?
         const squares = document.querySelectorAll(".grid-square:not(.highlight):not(.crossed)");
-        if (squares.length === 0) {
+        if (squares.length < 2) {
             console.log("no squares left to randomise!")
             return;
         }
@@ -80,10 +80,6 @@ function Control() {
         // after 3500ms, stop shuffling, highlight one last random, and toggle off
         setTimeout(() => {
             clearInterval(interval);
-
-            // clear all highlighted squares as a precaution (in case the randomisation selects it again and there is a race condition to clear it)
-            // again, this is dumb, but this is being cobbled together in a few hours
-            clear_all_highlights();
 
             // with a delay to further prevent a race condition. this isnt perfect, and i would do it differently if i cared more
             setTimeout(() => {
