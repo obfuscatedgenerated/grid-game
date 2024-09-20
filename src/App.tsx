@@ -10,9 +10,11 @@ function App() {
         load("public/pencil.mp3", {autoplay: false});
     }, [load]);
 
+    console.log("render app!");
+
     return <main>
-        <Grid/>
-        <Control/>
+        <Grid />
+        <Control />
     </main>
 }
 

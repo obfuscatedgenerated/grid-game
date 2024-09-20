@@ -12,6 +12,8 @@ function GridSquare(props: GridSquareProps) {
     const [crossed, setCrossed] = useState<boolean>(false);
     const { play } = useGlobalAudioPlayer(); // global player will be loaded with pencil.mp3
 
+    console.log("render grid square!")
+
     let className = "grid-square";
     if (props.highlight) {
         className += " highlight";
@@ -27,7 +29,7 @@ function GridSquare(props: GridSquareProps) {
     };
 
     return (
-        <td className={className} onClick={onClick}/>
+        <td data-row={props.row} data-col={props.col} className={className} onClick={onClick}/>
     );
 }
 

@@ -75,9 +75,28 @@ button:focus-visible {
     outline: 4px auto -webkit-focus-ring-color;
 }
 
+button.danger {
+    background-color: #e54d4d;
+}
+
+button.danger:hover {
+    border-color: #e54d4d;
+}
+
+button.danger:active {
+    background-color: #ff4d4d;
+    color: #ffffff;
+}
+
+.control {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
 
 .grid {
-    border-collapse: collapse;
+    border-collapse: separate;
 }
 
 .grid td {
@@ -88,13 +107,17 @@ button:focus-visible {
 }
 
 .grid-square {
-    border: solid 2px #000;
+    border: solid 0.4rem #000;
     background-size: contain;
 }
 
 /* too lazy 4 css modules */
 .grid-square.crossed {
     background-image: url(public/cross.png);
+}
+
+.grid-square.highlight {
+    border-color: #f00;
 }
 
 .label {
