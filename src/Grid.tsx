@@ -8,7 +8,7 @@ function Grid() {
     for (let i = 0; i < 7; i++) {
         const squares = [];
         for (let j = 0; j < 7; j++) {
-            squares.push(<GridSquare row={i} col={j} key={j} highlight={false} />);
+            squares.push(<GridSquare row={i} col={j} key={j} />);
         }
         rows.push(<tr key={i}>
             <td className="label">{i + 1}</td>
