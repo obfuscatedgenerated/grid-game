@@ -1,5 +1,6 @@
 import {useGlobalAudioPlayer} from "react-use-audio-player";
 import {useRef} from "react";
+import {log_grid_cross, log_grid_uncross} from "./util/log.ts";
 
 interface GridSquareProps {
     row: number;
@@ -22,9 +23,11 @@ function GridSquare(props: GridSquareProps) {
 
         if (element.classList.contains("crossed")) {
             element.classList.remove("crossed");
+            log_grid_uncross(props.row, props.col);
         } else {
             element.classList.add("crossed");
             element.classList.remove("highlight");
+            log_grid_cross(props.row, props.col);
         }
 
         play();

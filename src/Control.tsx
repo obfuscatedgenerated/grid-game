@@ -2,6 +2,8 @@ import {useAudioPlayer} from "react-use-audio-player";
 import {useEffect, useRef, useState} from "react";
 import BenDialog from "./BenDialog.tsx";
 import SquareDialog from "./SquareDialog.tsx";
+import {log_grid_clear} from "./util/log.ts";
+import LogDialog from "./LogDialog.tsx";
 
 const highlight_random = (clear_after: boolean) => {
     console.log("highlighting random!");
@@ -44,6 +46,7 @@ const clear_all_crosses = () => {
     squares.forEach((square) => {
         square.classList.remove("crossed");
     });
+    log_grid_clear();
 }
 
 function Control() {
@@ -52,6 +55,8 @@ function Control() {
 
     const square_dialog_ref = useRef<HTMLDialogElement>(null);
     const [square_dialog_text, set_square_dialog_text] = useState("unset!");
+
+    const log_dialog_ref = useRef<HTMLDialogElement>(null);
 
     const {load, play} = useAudioPlayer(); // this is a local player loaded with itembox.mp3
 
@@ -114,14 +119,26 @@ function Control() {
         }
     }
 
+    const onViewLogClick = () => {
+        if (log_dialog_ref.current) {
+            log_dialog_ref.current.showModal();
+        } else {
+            console.error("log dialog ref is null!");
+        }
+    }
+
     return (
         <div className="control">
             <button onClick={onRandomClick}>Choose random</button>
+            <hr />
             <button onClick={onClearHighlightsClick}>Clear highlights</button>
             <button className="danger" onClick={onClearCrossesClick}>Clear crosses</button>
+            <hr />
+            <button onClick={onViewLogClick}>View log</button>
 
             <SquareDialog ref={square_dialog_ref} grid_text={square_dialog_text} />
             <BenDialog ref={clear_dialog_ref} text="Are you sure you want to clear all crosses?" onAccept={clear_all_crosses} onReject={() => {}} />
+            <LogDialog ref={log_dialog_ref} />
         </div>
     );
 }
