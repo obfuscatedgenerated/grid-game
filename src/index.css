@@ -96,7 +96,7 @@ button.danger:active {
 
 
 .grid {
-    border-collapse: separate;
+    border-collapse: collapse;
 }
 
 .grid td {
@@ -117,7 +117,8 @@ button.danger:active {
 }
 
 .grid-square.highlight {
-    border-color: #f00;
+    outline: solid red 4px;
+    outline-offset: -4px;
 }
 
 .label {
