@@ -1,10 +1,14 @@
 import emoji from "./assets/ginger_nerd.png";
 
 import {useRef, useEffect, useState, useCallback} from "react";
+import { useAudioPlayer } from "react-use-audio-player";
 
 export const OllieWasHere = () => {
     const ref = useRef<HTMLDivElement>(null);
     const [fully_visible, setFullyVisible] = useState(false);
+
+    // local separate audio player for one off sound effect
+    const { load } = useAudioPlayer();
 
     // trigger fade in after 5 minutes :troll:
     useEffect(() => {
@@ -25,8 +29,11 @@ export const OllieWasHere = () => {
     const go_away = useCallback(() => {
         if (ref.current) {
             ref.current.style.display = "none";
+
+            // load get out sound effect and play when loaded
+            load("get_out.mp3", { initialVolume: 0.8, autoplay: true });
         }
-    }, []);
+    }, [load]);
 
     return (
         <div
