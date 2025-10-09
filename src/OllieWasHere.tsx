@@ -1,9 +1,10 @@
 import emoji from "./assets/ginger_nerd.png";
 
-import {useRef, useEffect} from "react";
+import {useRef, useEffect, useState, useCallback} from "react";
 
 export const OllieWasHere = () => {
     const ref = useRef<HTMLDivElement>(null);
+    const [fully_visible, setFullyVisible] = useState(false);
 
     // trigger fade in after 5 minutes :troll:
     useEffect(() => {
@@ -11,10 +12,21 @@ export const OllieWasHere = () => {
             if (ref.current) {
                 ref.current.style.opacity = "1";
             }
+
+            // after 10 seconds, it is fully visible, but its mostly visible by 10 seconds so use a 10 second delay
+            setTimeout(() => {
+                setFullyVisible(true);
+            }, 10 * 1000);
         }, 5 * 60 * 1000);
 
         return () => clearTimeout(timeout);
     });
+
+    const go_away = useCallback(() => {
+        if (ref.current) {
+            ref.current.style.display = "none";
+        }
+    }, []);
 
     return (
         <div
@@ -29,8 +41,11 @@ export const OllieWasHere = () => {
                 fontSize: "0.75rem",
                 opacity: 0,
                 transition: "opacity 20s",
+                cursor: fully_visible ? "pointer" : "default",
             }}
-             aria-hidden="true"
+            aria-hidden="true"
+            onClick={fully_visible ? go_away : undefined}
+            title={fully_visible ? "Click to make me go away :(" : undefined}
         >
             <span>ollie was here</span>
             <img src={emoji} style={{width: "1.5rem"}} />
