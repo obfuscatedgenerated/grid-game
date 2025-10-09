@@ -22,18 +22,18 @@ export const OllieWasHere = () => {
             style={{
                 display: "flex",
                 position: "absolute",
-                bottom: "1vh",
-                left: "1vw",
+                bottom: "1rem",
+                left: "1rem",
                 alignItems: "center",
-                gap: "0.25vw",
-                fontSize: "0.75vw",
+                gap: "0.25rem",
+                fontSize: "0.75rem",
                 opacity: 0,
                 transition: "opacity 20s",
             }}
              aria-hidden="true"
         >
             <span>ollie was here</span>
-            <img src={emoji} style={{width: "1.5vw"}} />
+            <img src={emoji} style={{width: "1.5rem"}} />
         </div>
     );
 }
