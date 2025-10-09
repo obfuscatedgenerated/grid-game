@@ -2,6 +2,7 @@ import Grid from "./Grid.tsx";
 import Control from "./Control.tsx";
 import {useEffect} from "react";
 import {useGlobalAudioPlayer} from "react-use-audio-player";
+import {OllieWasHere} from "./OllieWasHere.tsx";
 
 function App() {
     const {load} = useGlobalAudioPlayer(); // global player will be loaded with pencil.mp3 (so we dont have 49 requests for the same file)
@@ -17,6 +18,7 @@ function App() {
     return <main>
         <Grid />
         <Control />
+        <OllieWasHere />
     </main>
 }
 
