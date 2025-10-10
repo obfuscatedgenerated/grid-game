@@ -18,7 +18,7 @@ function App() {
     return <main>
         <Grid />
         <Control />
-        <OllieWasHere />
+        {/*<OllieWasHere />*/}
     </main>
 }
 
